@@ -12,7 +12,7 @@ class ProductController extends Controller
     {
         $id = $request->input('id');
         $limit = $request->input('limit', 6);
-        $name = $request->input('name', 6);
+        $name = $request->input('name');
         $slug = $request->input('slug');
         $type = $request->input('type');
         $price_from = $request->input('price_from');
@@ -54,6 +54,8 @@ class ProductController extends Controller
         if ($price_to){
             $product->where('price', '<=', $price_to);
         }
+
+        //dd($product->get());
         return ResponseFormatter::success(
             $product->paginate($limit),
             'Data list produk berhasil diambil'
